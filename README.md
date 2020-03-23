@@ -6,7 +6,9 @@
 ``` Static Nodelist hafa enga áhrif á kóðan safnið eftir breytingum á DOM. Live Nodelist lætur kóðan automatically updata kóða safnið.```
 #### 3. Hver er munurinn á true og false í AddEventListener?
 
-```True og false í AddEventListener er boolean sem segir hvort þurfi að grípa event eða ekki. Ef AddEventListener er True þá er hann Capture og fer frá top elementinu og niður. Ef það er False þá er það bubbling og fer frá neðsta elementinu og upp.```
+```True: er Capture og fer frá top elementinu og niður.
+   False: er bubbling og fer frá neðsta elementinu og upp.
+  ```
 #### 4. this vísar í Event listener á html element en ekki á object. Þú getur notað `bind()` til að breyta því. Leystu eftirfarandi kóðadæmi með notkun á `bind()` til að birta í console “My name is Sam“ en ekki undefined.
 ```javascript
 let Person = {
