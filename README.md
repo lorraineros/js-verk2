@@ -28,8 +28,8 @@ buttonEl.addEventListener('click', Person.sayName.bind(Person));
 let x = 0;
 const parag = document.querySelectorAll("p");
 parag.forEach(element => {
-	x++;
-	element.textContent = "paragraph "+ x;
+  x++;
+  element.textContent = "paragraph "+ x;
 });
 ```
 #### 3. Bættu við efst með `InnerHTML` `<h1>` með textanum Verkefni 2.2.
