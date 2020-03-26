@@ -1,96 +1,89 @@
-const questions = [
-  {
-    question: 'Earth is closest to the size of... ',
-    answers: [
-      { text: 'Mercury', correct: false },
-      { text: 'Venus', correct: true },
-      { text: 'Mars', correct: false },
-      { text: 'Sun', correct: false }
-    ]
-  },
-  {
-    question: '1 + 1 is 2.',
-    answers: [
-      { text: 'True', correct: true },
-      { text: 'False', correct: false }
-    ]
-  }
-]
+var q = ["Earth is closest to the size of... ?", "2 + 1 is 4."];
+var a1 = ["<button class=buttons002 onclick=q1c()>Venus</button>",
+          "<button class=buttons002 onclick=q2i()>True</button>"];
 
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById('answer-buttons')
+var a2 = ["<button class=buttons002 onclick=q1i()>Mars</button>",
+          "<button class=buttons002 onclick=q2c()>False</button>"];
 
-let shuffledQuestions, currentQuestionIndex
+var a3 = ["<button class=buttons002 onclick=q1i()>Saturn</button>",
+          "<button class=buttons002 onclick=q2i()>NONE</button>"];
 
-startButton.addEventListener('click', startGame)
-nextButton.addEventListener('click', () => {
-  currentQuestionIndex++
-  setNextQuestion()
-})
+var a4 = ["<button class=buttons002 onclick=q1i()>Jupiter</button>",
+          "<button class=buttons002 onclick=q2i()>NONE</button>"];
 
-function startGame() {
-  startButton.classList.add('hide')
-  shuffledQuestions = questions.sort(() => Math.random() - 1)
-  currentQuestionIndex = 0
-  questionContainerElement.classList.remove('hide')
-  setNextQuestion()
+var c = ["Correct", "Correct"];
+var i = ["Incorrect", "Incorrect"];
+
+var n = 0;
+n++;
+var s = 0;
+s++;
+
+function begin001() {
+    disappear001.innerHTML = "";
+    message001.innerHTML = "";
+    question001.innerHTML = q[0];
+    option001.innerHTML = a1[0];
+    option002.innerHTML = a2[0];
+    option003.innerHTML = a3[0];
+    option004.innerHTML = a4[0];
+    number001.innerHTML = n++;
 }
 
-function setNextQuestion() {
-  resetState()
-  showQuestion(shuffledQuestions[currentQuestionIndex])
+function q1c() {
+    answer001.innerHTML = "<div id=green001>" + c[0] + "</div>";
+    option001.innerHTML = "";
+    option002.innerHTML = "";
+    option003.innerHTML = "";
+    option004.innerHTML = "";
+    next001.innerHTML = "<button class=buttons001 onclick=new002()>Next</button>";
+    score001.innerHTML = s++;
 }
 
-function showQuestion(question) {
-  questionElement.innerText = question.question
-  question.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.innerText = answer.text
-    button.classList.add('btn')
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
-    }
-    button.addEventListener('click', selectAnswer)
-    answerButtonsElement.appendChild(button)
-  })
+function q1i() {
+    answer001.innerHTML = "<div id=red001>" + i[0] + "</div>";
+    option001.innerHTML = "";
+    option002.innerHTML = "";
+    option003.innerHTML = "";
+    option004.innerHTML = "";
+    next001.innerHTML = "<button class=buttons001 onclick=new002()>Next</button>";
 }
 
-function resetState() {
-  clearStatusClass(document.body)
-  nextButton.classList.add('hide')
-  while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-  }
+function new002() {
+    question001.innerHTML = q[1];
+    option001.innerHTML = a1[1];
+    option002.innerHTML = a2[1];
+    next001.innerHTML = "";
+    answer001.innerHTML = "";
+    number001.innerHTML = n++;
 }
 
-function selectAnswer(e) {
-  const selectedButton = e.target
-  const correct = selectedButton.dataset.correct
-  setStatusClass(document.body, correct)
-  Array.from(answerButtonsElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-  })
-  if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove('hide')
-  } else {
-    startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
-  }
+function q2c() {
+    answer001.innerHTML = "<div id=green001>" + c[1] + "</div>";
+    option001.innerHTML = "";
+    option002.innerHTML = "";
+    next001.innerHTML = "<button class=buttons001 onclick=end001()>End of Quiz</button>";
+    score001.innerHTML = s++;
 }
 
-function setStatusClass(element, correct) {
-  clearStatusClass(element)
-  if (correct) {
-    element.classList.add('correct')
-  } else {
-    element.classList.add('wrong')
-  }
+function q2i() {
+    answer001.innerHTML = "<div id=red001>" + i[1] + "</div>";
+    option001.innerHTML = "";
+    option002.innerHTML = "";
+    next001.innerHTML = "<button class=buttons001 onclick=end001()>End of Quiz</button>";
 }
 
-function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
+function end001() {
+    message001.innerHTML = "End of Quiz.";
+    question001.innerHTML = "";
+    option001.innerHTML = "";
+    option002.innerHTML = "";
+    option003.innerHTML = "";
+    option004.innerHTML = "";
+    next001.innerHTML = "<div id=text001>" + "<button class=buttons001 onclick=repeat001()>Repeat</button>" + "</div>";
+    answer001.innerHTML = "";
+}
+
+function repeat001() {
+    location.reload();
 }
